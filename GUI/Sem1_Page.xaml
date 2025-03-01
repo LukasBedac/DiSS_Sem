@@ -10,7 +10,7 @@
     <Grid>
 
 
-        <oxy:PlotView x:Name="Chart" HorizontalAlignment="Left" Margin="142,129,0,0" VerticalAlignment="Top" Height="229" Width="480"/>
+        <oxy:PlotView x:Name="Chart" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"  Height="500" Width="900"/>
 
 
     </Grid>

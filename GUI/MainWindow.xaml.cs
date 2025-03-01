@@ -19,7 +19,6 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            MainWindow1.WindowState = WindowState.Maximized;
         }
 
         private void Sem1_Click(object sender, RoutedEventArgs e)
@@ -31,6 +30,16 @@ namespace GUI
 
         }
         private void Sem3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StopBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OxyPlot.Series;
+using OxyPlot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,38 @@ namespace GUI
     /// </summary>
     public partial class Sem1_Page : UserControl
     {
+        public PlotModel? PlotModel { get; set; }
+        public LineSeries? LineSeries { get; set; }
+        public List<DataPoint>? DataPoints { get; set; } = [];
         public Sem1_Page()
         {
             InitializeComponent();
+            InitGraph();
+        }
+
+        private void InitGraph()
+        {
+            PlotModel = new PlotModel();
+            PlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
+            {
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                Title = "Replications",
+                MajorGridlineStyle = OxyPlot.LineStyle.Solid,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                StringFormat = "N0"
+            });
+            PlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
+            {
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                Title = "PI",
+                MajorGridlineStyle = OxyPlot.LineStyle.Solid,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                StringFormat = "N0"
+            });
+
+            LineSeries = new LineSeries();
+            PlotModel.Series.Add(LineSeries);
+            Chart.Model = PlotModel;
         }
     }
 }
