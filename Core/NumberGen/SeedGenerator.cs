@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.NumberGenerator
+namespace Core.NumberGen
 {
     public static class SeedGenerator
     {

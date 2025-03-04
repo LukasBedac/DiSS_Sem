@@ -16,10 +16,10 @@ namespace Core.SimulationCore
         public virtual void OneReplication() { }
         public virtual void Simulate(int replications)
         {
-            for (int i = 0; i < replications; i++)
-            {
-                OneReplication();
-            }
+            //for (int i = 0; i < replications; i++)
+            //{
+            //    OneReplication();
+            //}
         }
     }
 }
