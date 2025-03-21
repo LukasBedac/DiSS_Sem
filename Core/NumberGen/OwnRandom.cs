@@ -8,17 +8,19 @@ namespace Core.NumberGen
 {
     public class OwnRandom
     {
-        public Random? Random { get; set; } = null;
-        public List<Random>? Randoms { get; set; } = null;
-        public List<Scope>? Scopes { get; set; } = null;
-        public bool IsDiscrete { get; set; }
-        public Random? ProbabilityGen { get; set; } = null;
+        private Random? Random { get; set; } = null;
+        private List<Random>? Randoms { get; set; } = null;
+        private List<Scope> Scopes { get; set; } = new List<Scope>();
+        private bool IsDiscrete { get; set; }
+        private Random ProbabilityGen { get; set; } = new Random(SeedGenerator.GetSeed());
+        private const double CHECK = 0.000000000001;
         public OwnRandom(bool isDiscrete, List<Scope> scopes) 
         {
             IsDiscrete = isDiscrete;
             Scopes = scopes;
             CreateRandom(scopes);
         }
+
         private void CreateRandom(List<Scope> scopes) 
         {
             if (scopes.Count == 1)
@@ -37,23 +39,27 @@ namespace Core.NumberGen
         {
             if (Random != null)
             {
-                return Random.Next();
+                return Random.Next(Scopes[0].Max - Scopes[0].Min + 1) + Scopes[0].Min;
             }
             else
             {
-                throw new Exception("Random is null");
+                return NextInt(ProbabilityGen.NextDouble());
             }
         }
-        public int NextInt(double probability)
+        private int NextInt(double probability)
         {
             int value = 0;
             if (Randoms?.Count > 0)
             {
+                double scopeProbability = Scopes[0].Probability;
                 for (int i = 0; i < Randoms.Count;i++)
                 {
-                    if (probability < Scopes?[0].Probability)
+                    if (probability <= scopeProbability + CHECK)
                     {
-                        value = Randoms[i].Next(Scopes[i].Min, Scopes[i].Max + 1);
+                        return value = Randoms[i].Next(Scopes[i].Max - Scopes[i].Min) + Scopes[i].Min;
+                    } else
+                    {
+                        scopeProbability += Scopes[i + 1].Probability;
                     }
                 }
             }
@@ -68,31 +74,32 @@ namespace Core.NumberGen
         {
             if (Random != null)
             {
-                return Random.NextDouble();
+                return Scopes[0].Min + ((1.0 - Double.Epsilon) * Random.NextDouble()
+                            * (Scopes[0].Max - Scopes[0].Min));
             } else
             {
-                throw new Exception("Random is null");
+                return NextDouble(ProbabilityGen.NextDouble());
             }
         }
-        public double NextDouble(double probability)
+        private double NextDouble(double probability)
         {
             double value = 0;
             if (Randoms?.Count > 0)
             {
+                double scopeProbability = Scopes[0].Probability;
                 for (int i = 0; i < Randoms.Count; i++)
                 {
-                    if (probability < Scopes?[0].Probability)
+                    if (probability <= scopeProbability + CHECK)
                     {
-                        value = Scopes[i].Min + Randoms[i].NextDouble() 
-                            * (Scopes[i].Max - Scopes[i].Min);
+                        return value = Scopes[i].Min + ((1.0 - Double.Epsilon) * Randoms[i].NextDouble()
+                            * (Scopes[i].Max - Scopes[i].Min));
+                    } else
+                    {
+                        scopeProbability += Scopes[i + 1].Probability;
                     }
                 }
             }
-            else
-            {
-                throw new Exception("Random is null");
-            }
-            return value;
+            throw new Exception("Random is null");
         }
     }
 }

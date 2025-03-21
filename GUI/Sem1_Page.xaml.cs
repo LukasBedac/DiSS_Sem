@@ -45,7 +45,7 @@ namespace GUI
             PlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
             {
                 Position = OxyPlot.Axes.AxisPosition.Left,
-                Title = "PI",
+                Title = "Price",
                 MajorGridlineStyle = OxyPlot.LineStyle.Solid,
                 MinorGridlineStyle = OxyPlot.LineStyle.Dot,
                 StringFormat = "N0"

@@ -9,12 +9,14 @@ namespace Core.NumberGen
     public static class SeedGenerator
     {
         private static Random SeedGen = new Random();
-        
+        public static List<int> GeneratedUsedSeeds = new List<int>();
         public static int GetSeed()
         {
             lock (SeedGen)
             {
-                return SeedGen.Next();
+                int seed = SeedGen.Next();
+                GeneratedUsedSeeds.Add(seed);
+                return seed;
             }
         }
     }

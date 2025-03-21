@@ -11,11 +11,18 @@ namespace Core.NumberGen
         public int Min { get; set; }
         public int Max { get; set; }
         public double Probability { get; set; }
+        public int Modus { get; set; }
         public Scope(int min, int max, double probability)
         {
             Min = min; 
             Max = max; 
             Probability = probability;
+        }
+        public Scope(int min, int max, int modus)
+        {
+            Min = min;
+            Max = max;
+            Modus = modus;
         }
     }
 }

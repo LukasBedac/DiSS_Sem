@@ -6,12 +6,8 @@
              xmlns:local="clr-namespace:GUI"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:oxy="http://oxyplot.org/wpf" x:Class="GUI.Sem1_Page"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200">
+             d:DesignHeight="500" d:DesignWidth="900">
     <Grid>
-
-
         <oxy:PlotView x:Name="Chart" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"  Height="500" Width="900"/>
-
-
     </Grid>
 </UserControl>
