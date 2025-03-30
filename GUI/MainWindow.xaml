@@ -20,9 +20,6 @@
                     Height="30" Width="150" Click="Sem1_Click"/>
                 <Button Content="Semestral work 2" HorizontalAlignment="Left" Margin="170,-30,0,0" VerticalAlignment="Top"
                     Height="30" Width="150" Click="Sem2_Click"/>
-                <Button Content="Semestral work 3" HorizontalAlignment="Left" Margin="330,-30,0,0" VerticalAlignment="Top"
-                    Height="30" Width="150" Click="Sem3_Click"/>
-            
             </StackPanel>
         </Border>
         <Border Margin="0,0,0,0" Width="Auto" Height="Auto" BorderThickness="1" HorizontalAlignment="Left" BorderBrush="White">
@@ -30,8 +27,11 @@
                 <Label Margin="50,0,50,0" Content="Settings" FontSize="24"  Foreground="White"/>
                 <Label Margin="50,10,50,0" Content="Replications" Foreground="White"/>
                 <TextBox x:Name="ReplicationCount" Margin="50,0,50,0" />
+                <ComboBox x:Name="ReplicationsComboBox" Margin="50,10,50,0" SelectionChanged="ReplicationsComboBox_SelectionChanged" ></ComboBox>
                 <Button Margin="50,10,50,0" x:Name="StartBtn" Content="Start" Click="StartBtn_Click"/>
                 <Button Margin="50,10,50,0" x:Name="StopBtn" Content="Stop" Click="StopBtn_Click"/>
+                <Button Margin="50,10,50,0" x:Name="Pause" Content="Pause" Click="PauseBtn_Click"/>
+                <Button Margin="50,10,50,0" x:Name="Resume" Content="Resume" Click="ResumeBtn_Click"/>
                 <Button Margin="50,10,50,0" x:Name="StrategyABtn" Content="Strategy A" Click="StrategyABtn_Click"/>
                 <Button Margin="50,10,50,0" x:Name="StrategyBBtn" Content="Strategy B" Click="StrategyBBtn_Click"/>
                 <Button Margin="50,10,50,0" x:Name="StrategyCBtn" Content="Strategy C" Click="StrategyCBtn_Click"/>

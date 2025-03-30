@@ -1,5 +1,4 @@
 ﻿using Core.SimulationCore;
-using Core.Test;
 using GUI.Simulations.Sem1;
 using System.Text;
 using System.Windows;
@@ -20,24 +19,38 @@ namespace GUI
     public partial class MainWindow : Window
     {
         public Sem1Simulation? WareHouseSimulation { get; set; } = null;
-        public Sem1_Page? Sem1Chart { get; set; } = null;
+        public MonteCarlo? Sem1Chart { get; set; } = null;
+        public EventSimulation? EventSimulation { get; set; } = null;
         public MainWindow()
         {
             InitializeComponent();
             HideSem1Buttons();
-            //Generating tests for probability correction
-            //TestGen gen = new TestGen();
+            InitReplicationsCount();
+        }
+
+        private void InitReplicationsCount()
+        {
+            ComboBoxItem milion = new ComboBoxItem();
+            ComboBoxItem tenmilion = new ComboBoxItem();
+            ComboBoxItem thousand100 = new ComboBoxItem();
+            milion.Content = "1 Milion";
+            tenmilion.Content = "10 Milion";
+            thousand100.Content = "100 Thousand";
+            ReplicationsComboBox.Items.Add(thousand100);
+            ReplicationsComboBox.Items.Add(milion);
+            ReplicationsComboBox.Items.Add(tenmilion);
         }
 
         private void Sem1_Click(object sender, RoutedEventArgs e)
         {
-            Sem1Chart = new Sem1_Page();
+            Sem1Chart = new MonteCarlo();
             MainContent.Content = Sem1Chart;
             ShowSem1Buttons();
         }
         private void Sem2_Click(object sender, RoutedEventArgs e)
         {
-
+            EventSimulation = new EventSimulation();
+            MainContent.Content = EventSimulation;
             HideSem1Buttons();
         }
         private void Sem3_Click(object sender, RoutedEventArgs e)
@@ -48,7 +61,7 @@ namespace GUI
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void StopBtn_Click(object sender, RoutedEventArgs e)
@@ -61,7 +74,31 @@ namespace GUI
                 throw new Exception("Simulation was not inicialized");
             }
         }
+        private void ReplicationsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ReplicationsComboBox.SelectedItem != null)
+            {
+                if (ReplicationsComboBox.SelectedItem is ComboBoxItem selectedItem)
+                {
+                    switch (selectedItem.Content.ToString())
+                    {
+                        case "1 Milion":
+                            ReplicationCount.Text = "1000000";
+                            break;
+                        case "10 Milion":
+                            ReplicationCount.Text = "10000000";
+                            break;
+                        case "100 Thousand":
+                            ReplicationCount.Text = "100000";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
 
+        #region Sem1
         private void StrategyABtn_Click(object sender, RoutedEventArgs e)
         {
             if (ChartSwitchButton.IsChecked == true)
@@ -145,6 +182,16 @@ namespace GUI
             CustomStrategyBtn.Visibility = Visibility.Visible;
         }
 
-        
+        #endregion Sim1
+
+        private void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ResumeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

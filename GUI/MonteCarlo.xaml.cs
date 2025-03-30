@@ -20,12 +20,12 @@ namespace GUI
     /// <summary>
     /// Interaction logic for Sem1_Page.xaml
     /// </summary>
-    public partial class Sem1_Page : UserControl
+    public partial class MonteCarlo : UserControl
     {
         public PlotModel? PlotModel { get; set; }
         public LineSeries? LineSeries { get; set; }
         public List<DataPoint>? DataPoints { get; set; } = [];
-        public Sem1_Page()
+        public MonteCarlo()
         {
             InitializeComponent();
             InitGraph();

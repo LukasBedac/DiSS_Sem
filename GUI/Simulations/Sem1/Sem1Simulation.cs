@@ -1,4 +1,5 @@
 ﻿using Core.NumberGen;
+using Core.NumberGen.Distributions;
 using Core.SimulationCore;
 using DiscordRPC;
 using OxyPlot;
@@ -23,13 +24,13 @@ namespace GUI.Simulations.Sem1
         private const int CHARTPOINTS = 100;
         private int WritePointNumber = 1;
         #region Randoms
-        private OwnRandom? ShockAbsorbers { get; set; } = null;
-        private OwnRandom? BrakeDiscs { get; set; } = null;
-        private OwnRandom? Headlights { get; set; } = null;
-        private OwnRandom? Supplier1_1 { get; set; } = null;
-        private OwnRandom? Supplier1_2 { get; set; } = null;
-        private OwnRandom? Supplier2_1 { get; set; } = null;
-        private OwnRandom? Supplier2_2 { get; set; } = null;
+        private EvenDist? ShockAbsorbers { get; set; } = null;
+        private EvenDist? BrakeDiscs { get; set; } = null;
+        private EvenDist? Headlights { get; set; } = null;
+        private EvenDist? Supplier1_1 { get; set; } = null;
+        private EvenDist? Supplier1_2 { get; set; } = null;
+        private EvenDist? Supplier2_1 { get; set; } = null;
+        private EvenDist? Supplier2_2 { get; set; } = null;
         private Random? ArrivalChance {  get; set; } = null;
         #endregion Randoms
         #region WarehouseStoringAndFines
@@ -65,6 +66,9 @@ namespace GUI.Simulations.Sem1
                 if (replications == 1)
                 {
                     PlotModel.DefaultXAxis.Title = "Days";
+                } else
+                {
+                    PlotModel.DefaultXAxis.Title = "Replications";
                 }
                 if (Strategy < 1 || Strategy > 4)
                 {
@@ -447,10 +451,10 @@ namespace GUI.Simulations.Sem1
 
         private void InitSuppliers()
         {
-            Supplier1_1 = new OwnRandom(false, new List<Scope> { new Scope(10, 70, -1) });
-            Supplier1_2 = new OwnRandom(false, new List<Scope> { new Scope(30, 95, -1) });
+            Supplier1_1 = new EvenDist(false, new List<Scope> { new Scope(10, 70, -1) });
+            Supplier1_2 = new EvenDist(false, new List<Scope> { new Scope(30, 95, -1) });
             
-            Supplier2_1 = new OwnRandom(false, new List<Scope> 
+            Supplier2_1 = new EvenDist(false, new List<Scope> 
             { 
                 new Scope(5, 10, 0.4),
                 new Scope(10, 50, 0.3),
@@ -458,7 +462,7 @@ namespace GUI.Simulations.Sem1
                 new Scope(70, 80, 0.06),
                 new Scope(80, 95, 0.04),
             });
-            Supplier2_2 = new OwnRandom(false, new List<Scope>
+            Supplier2_2 = new EvenDist(false, new List<Scope>
             {
                 new Scope(5, 10, 0.2),
                 new Scope(10, 50, 0.4),
@@ -470,9 +474,9 @@ namespace GUI.Simulations.Sem1
 
         private void InitParts()
         {
-            ShockAbsorbers = new OwnRandom(true, new List<Scope> { new Scope(50, 100, -1) });
-            BrakeDiscs = new OwnRandom(true, new List<Scope> { new Scope(60, 250, -1) });
-            Headlights = new OwnRandom(true, new List<Scope>
+            ShockAbsorbers = new EvenDist(true, new List<Scope> { new Scope(50, 100, -1) });
+            BrakeDiscs = new EvenDist(true, new List<Scope> { new Scope(60, 250, -1) });
+            Headlights = new EvenDist(true, new List<Scope>
             {
                 new Scope(30, 60, 0.2),
                 new Scope(60, 100, 0.4),
